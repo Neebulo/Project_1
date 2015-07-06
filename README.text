@@ -1,3 +1,10 @@
 Simple symbol matching game
-User match 'bad' will cause a lost
-User match 'good' will cause a win
+
+1 player or 2.
+
+Player will match a set of 20 cards.
+card set has 'good' and 'bad' cards.
+
+If player pulls 2 'bad' symbols, it causes a lost.
+if player pulls 2 'good' symbols, it causes a win.
+symbols must be a mirror pair and not same kind to trigger a lost or win.

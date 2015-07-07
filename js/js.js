@@ -1,4 +1,4 @@
-var numberOfImages = 20;
+//var numberOfImages = 20;
 
 //Randomize image locations
 var images = [ "https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg", //bloody 'bad'
@@ -22,23 +22,59 @@ var images = [ "https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg", //bloody 'bad
               "http://i.ytimg.com/vi/JU_uEdrrhXM/maxresdefault.jpg", // blue 'good'
               "http://i.ytimg.com/vi/JU_uEdrrhXM/maxresdefault.jpg",]; // blue 'good'
 
- var images = shuffle(images);
 
-for(var i = 0; i <= numberOfImages; ++i)
-{
-	$('img' + i).attr("src", images[ i - 1]);
-}
-//randomizes picture but only once and applies to all squares
-images.sort(function() { return 0.5 - Math.random() });
 
-// function at img click, flips card over
+
+//  var images = shuffle(images);
+//
+// for(var i = 0; i <= numberOfImages; ++i)
+// {
+// 	$('img' + i).attr("src", images[ i - 1]);
+// }
+
+// function at img click, flips card over to show img
 $('img').click(function(){
     //console.log('image clicked')
-    $(this).attr('src', images[0]); //'this' signifies a single div rather than all divs with tile class
-    $('img').show();
-    });
+    $(this).attr('src', shuffle()); //'this' signifies a single div rather than all divs with tile class
+    $('img').show(); // jquery to show img
 
-    function shuffle(o){
-        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-        return o;
+    checkWin(); // does comparison
+});
+
+
+function checkWin(){
+
+  for (var i = 0; i <20; ++i){ //loops through board
+    for (var j = 0; j < 20; j++){ // another loop through board to find a match
+      var firstTileToCompare = "#tile" + i; //"#tile0" //
+      var secondTileToCompare = "#tile" + j; //"#tile1"
+      if ($(firstTileToCompare).attr('src') !== "assets/fate.png") { //excludes default tile from comparison
+        if (i !== j) {
+          if ($(secondTileToCompare).attr('src') !== "assets/fate.png") {// 2nd exclude default tile
+            if ($(firstTileToCompare).attr('src') === $(secondTileToCompare).attr('src')) { //checks for match by img src
+              console.log(tile1);
+              console.log(tile2);
+              console.log('you won!');
+              resetBoard();
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//shuffles images array but still keeps its array value from var
+    function shuffle(){
+         var randomNumber = Math.floor(Math.random()*20); // *randomize number 0-20
+         var url = images[randomNumber]; //returns image from array position randomized
+         return url;
     };
+
+
+    function resetBoard(){ //resets the board
+      for(var i = 0; i < 20; ++i){ //loops through all tiles
+        var firstTileToReset = "#tile" + i; //
+        $(firstTileToReset).attr('src', 'assets/fate.png'); //resets to default img
+      }
+    }

@@ -34,12 +34,21 @@ var images = [ "https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg", //bloody 'bad
 
 // function at img click, flips card over to show img
 $('img').click(function(){
-    //console.log('image clicked')
-    $(this).attr('src', shuffle()); //'this' signifies a single div rather than all divs with tile class
-    $('img').show(); // jquery to show img
+  $(this).attr('src', shuffle());//'this' signifies a single div rather than all divs with tile class
+  $(this).show().unbind(); // jquery to show img and unbind to allow only card to flip once
+  checkWin(); // does comparison
+})
 
-    checkWin(); // does comparison
-});
+
+
+//   function starter(){
+//     $('img').click(function(){
+//     $(this).attr('src', shuffle());
+//     $(this).show().unbind();
+//     checkWin();
+//     });
+// }
+
 
 
 function checkWin(){
@@ -55,6 +64,7 @@ function checkWin(){
               console.log(tile1);
               console.log(tile2);
               console.log('you won!');
+              alert(' Team, You are up');
               resetBoard();
             }
           }
@@ -75,6 +85,7 @@ function checkWin(){
     function resetBoard(){ //resets the board
       for(var i = 0; i < 20; ++i){ //loops through all tiles
         var firstTileToReset = "#tile" + i; //
-        $(firstTileToReset).attr('src', 'assets/fate.png'); //resets to default img
+        $(firstTileToReset).attr('src', 'assets/fate.png');//resets to default img
+        // starter();
       }
     }

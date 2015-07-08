@@ -23,47 +23,32 @@ var images = [ "https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg", //bloody 'bad
               "http://i.ytimg.com/vi/JU_uEdrrhXM/maxresdefault.jpg",]; // blue 'good'
 
 
-
-
-//  var images = shuffle(images);
-//
-// for(var i = 0; i <= numberOfImages; ++i)
-// {
-// 	$('img' + i).attr("src", images[ i - 1]);
-// }
-
-// function at img click, flips card over to show img
-$('img').click(function(){
-  $(this).attr('src', shuffle());//'this' signifies a single div rather than all divs with tile class
-  $(this).show().unbind(); // jquery to show img and unbind to allow only card to flip once
-  checkWin(); // does comparison
-})
-
-
-
-//   function starter(){
-//     $('img').click(function(){
-//     $(this).attr('src', shuffle());
-//     $(this).show().unbind();
-//     checkWin();
-//     });
-// }
-
-
+for(var i=0;i<20;i++){ //setting for tiles 0-19
+ $('img')[i].isClicked=false;
+} // jquery form to set variable isClicked to click listener on 'img' as false
+  function starter(){
+    $('img').click(function(){ //at 'img' click
+   if(this.isClicked ==false){ //if tile is default(false) at click ************* /allows for only 1 click to prevent image shuffle
+     this.isClicked =true;// make tile true and run shuffle() to change image**** /on a single card*******
+      $(this).attr('src', shuffle()); //'this' signifies current tile rather than all tiles at once with class 'img'
+      checkWin();
+   }
+    });
+}
+    $(starter) // Game Initializer
 
 function checkWin(){
 
   for (var i = 0; i <20; ++i){ //loops through board
     for (var j = 0; j < 20; j++){ // another loop through board to find a match
-      var firstTileToCompare = "#tile" + i; //"#tile0" //
-      var secondTileToCompare = "#tile" + j; //"#tile1"
+      var firstTileToCompare = "#tile" + i; //"#tile0" // 'tileMachine1'
+      var secondTileToCompare = "#tile" + j; //"#tile1" // 'tileMachine2'
       if ($(firstTileToCompare).attr('src') !== "assets/fate.png") { //excludes default tile from comparison
-        if (i !== j) {
+        if (i !== j) { // dont compare single card found by 2 machines as a win
           if ($(secondTileToCompare).attr('src') !== "assets/fate.png") {// 2nd exclude default tile
             if ($(firstTileToCompare).attr('src') === $(secondTileToCompare).attr('src')) { //checks for match by img src
-              console.log(tile1);
-              console.log(tile2);
-              console.log('you won!');
+              console.log('tileMachine1');
+              console.log('tileMachine2');
               alert(' Team, You are up');
               resetBoard();
             }
@@ -74,18 +59,17 @@ function checkWin(){
   }
 }
 
-//shuffles images array but still keeps its array value from var
+//shuffles images array to place on #tile position
     function shuffle(){
-         var randomNumber = Math.floor(Math.random()*20); // *randomize number 0-20
+         var randomNumber = Math.floor(Math.random()*19); // *randomize number 0-19
          var url = images[randomNumber]; //returns image from array position randomized
          return url;
-    };
-
+    }
 
     function resetBoard(){ //resets the board
       for(var i = 0; i < 20; ++i){ //loops through all tiles
-        var firstTileToReset = "#tile" + i; //
-        $(firstTileToReset).attr('src', 'assets/fate.png');//resets to default img
-        // starter();
+        $('img')[i].isClicked=false; // added to include img value as 'false' again to enable clicking
+        var firstTileToReset = "#tile" + i; // variable firstTileToReset to count tile position
+        $(firstTileToReset).attr('src', 'assets/fate.png');//sets tile to default img
       }
     }

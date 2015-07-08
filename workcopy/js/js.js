@@ -36,7 +36,9 @@ var images = [ {name:"https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg",category
 // function at img click, flips card over to show img
 $('img').click(function(){
     //console.log('image clicked')
-    $(this).attr('src', shuffle()); //'this' signifies a single div rather than all divs with tile class
+    var result = shuffle(); //{name: "httpjkjlja", category: "good"}
+    $(this).attr('src', result.name); //'this' signifies a single div rather than all divs with tile class
+    $(this).addClass(result.category);
     $(this).show().unbind(); // jquery to show img
 
     checkWin(); // does comparison

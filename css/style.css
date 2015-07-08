@@ -12,10 +12,10 @@ body {
 }
 .container {
   width: 600px;
-  height: 330px;
+  height: 520px;
   text-align: center;
   margin: 5% auto;
-  background-color: rgb(0, 224, 255);
+  background-color: rgba(0, 224, 255, 0.31);
   border-radius: 54px;
 }
 .tile, img {

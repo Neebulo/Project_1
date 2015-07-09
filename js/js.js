@@ -84,7 +84,15 @@ function checkWin(){
             if ($(firstTileToCompare).attr('src') === $(secondTileToCompare).attr('src')) { //checks for match by img src
               console.log('tileMachine1');
               console.log('tileMachine2');
-              alert(' Team, You are up');
+              //if tile has an class attribute of 'bad'
+              if($(secondTileToCompare).attr('class') === "bad"){
+// invoke 'bad' alert
+                alert('Seems like you lost your life, Try again.');
+              } else {
+// otherwise invoke 'good' alert
+                alert("Looks like you get to Live!");
+              }
+
               resetBoard();
             }
           }

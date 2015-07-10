@@ -51,20 +51,20 @@ for(var i=0;i<20;i++){ //setting for tiles 0-19
 ////////                  STARTER FUNCTION             /////////////////////////
   function starter(){
     $('img').click(function(){ //at 'img' click
-   if(this.isClicked ==false){ //if tile is default(false) at click ************* /allows for only 1 click to prevent image shuffle
-     this.isClicked =true;// make tile true and run shuffle() to change image**** /on a single card*******
+       if(this.isClicked ==false){ //if tile is default(false) at click ************* /allows for only 1 click to prevent image shuffle
+         this.isClicked =true;// make tile true and run shuffle() to change image**** /on a single card*******
 
-//////********* Categorize images to 'bad' and 'good'*************///////////////
-      //creates variable 'result' to be shuffle() to be used to split between category 'good' and 'bad'
-      var result=shuffle(); //also invokes shuffle() method
-  //assigns for image name
-      $(this).attr('src', result.name);
-  //'this' signifies current tile rather than all tiles at once with class 'img'
-  // adds class category to img name
-      $(this).addClass(result.category);
-//////*****************************************************////////////
-      checkWin();
-   }
+    //////********* Categorize images to 'bad' and 'good'*************///////////////
+          //creates variable 'result' to be shuffle() to be used to split between category 'good' and 'bad'
+          var result=shuffle(); //also invokes shuffle() method
+      //assigns for image name
+          $(this).attr('src', result.name);
+      //'this' signifies current tile rather than all tiles at once with class 'img'
+      // adds class category to img name
+          $(this).addClass(result.category);
+    //////*****************************************************////////////
+          checkWin();
+       }
     });
 }
 /////////////            STARTER FUNCTION END             /////////////////////

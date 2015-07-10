@@ -7,7 +7,7 @@ var images = [ {name:"https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg",category
               {name:"http://1.bp.blogspot.com/-JtW1NPU1QOE/VMkjVYwsQTI/AAAAAAAABG8/rJ8W14CI6Ak/s1600/vlcsnap-2014-10-06-16h24m06s61-620x348.png", category: 'good'}, //block 'good'
               {name:"http://i1.ytimg.com/vi/th7ve2sYxn8/mqdefault.jpg",category: 'bad'}, //heart rip 'bad'
               {name:"http://pre08.deviantart.net/af37/th/pre/i/2007/261/c/9/blood_of_saber_by_wasgoed.jpg",category: 'bad'}, // bleed 'bad'
-					  {name:"http://wanabrar.com/blog/wp-content/uploads/2015/04/tumblr_nmbt72MLAD1u9lneoo2_500.gif"}, //green light 'good'
+					  {name:"http://wanabrar.com/blog/wp-content/uploads/2015/04/tumblr_nmbt72MLAD1u9lneoo2_500.gif", category: 'good'}, //green light 'good'
               {name:"http://pa1.narvii.com/5737/85b5a73b460611f18b08b0d868f2360a7257fea2_hq.gif",category: 'bad'}, // splash blood gif bad
               {name:"http://i1.ytimg.com/vi/th7ve2sYxn8/mqdefault.jpg",category: 'bad'}, //heart rip 'bad'
               {name:"http://2.bp.blogspot.com/-ZeRCnqd8Y9c/VXcdmmw3b2I/AAAAAAAABq0/SeMTnrTs1kQ/s640/archer%2Bstab.gif",category: 'bad'},//stab knife gif 'bad'
@@ -44,7 +44,6 @@ var images = [ {name:"https://i.ytimg.com/vi/yyXAjGf5xoc/hqdefault.jpg",category
 //               "http://i.ytimg.com/vi/JU_uEdrrhXM/maxresdefault.jpg", // blue 'good'
 //               "http://i.ytimg.com/vi/JU_uEdrrhXM/maxresdefault.jpg"]; // blue 'good'
 
-
 for(var i=0;i<20;i++){ //setting for tiles 0-19
  $('img')[i].isClicked=false;
 } // jquery form to set variable isClicked to click listener on 'img' as false
@@ -69,11 +68,9 @@ for(var i=0;i<20;i++){ //setting for tiles 0-19
     });
 }
 /////////////            STARTER FUNCTION END             /////////////////////
-
     $(starter) // Game Initializer
 
 function checkWin(){
-
   for (var i = 0; i <20; ++i){ //loops through board
     for (var j = 0; j < 20; j++){ // another loop through board to find a match
       var firstTileToCompare = "#tile" + i; //"#tile0" // 'tileMachine1'
@@ -87,12 +84,27 @@ function checkWin(){
               //if tile has an class attribute of 'bad'
               if($(secondTileToCompare).attr('class') === "bad"){
 // invoke 'bad' alert
+                $( "#gallery" ).dialog({
+                  modal: true,
+                  buttons: {
+                    Ok: function() {
+                      $( this ).dialog( "close" );
+                    }
+                  }
+                });
                 alert('Seems like you lost your life, Try again.');
               } else {
 // otherwise invoke 'good' alert
+                $( "#gallery2" ).dialog({
+                  modal: true,
+                  buttons: {
+                    Ok: function() {
+                      $( this ).dialog( "close" );
+                    }
+                  }
+                });
                 alert("Looks like you get to Live!");
               }
-
               resetBoard();
             }
           }
@@ -101,14 +113,12 @@ function checkWin(){
     }
   }
 }
-
 //shuffles images array to place on #tile position
     function shuffle(){
          var randomNumber = Math.floor(Math.random()*19); // *randomize number 0-19
          var url = images[randomNumber]; //returns image from array position randomized
          return url;
     }
-
     function resetBoard(){ //resets the board
       for(var i = 0; i < 20; ++i){ //loops through all tiles
         $('img')[i].isClicked=false; // added to include img value as 'false' again to enable clicking
